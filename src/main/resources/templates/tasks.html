@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header th:insert="header.html :: header"></header>
+
+<table th:if="${!tasks.empty}">
+    <tr>
+        <th>Titel</th>
+        <th>Description</th>
+        <th>Due date</th>
+        <th>Time</th>
+        <th></th>
+    </tr>
+    <tr th:each="task : ${tasks}" >
+        <td><a th:href="@{/tasks/} + ${task.id}" th:text="${task.name}"></a></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.date}"></td>
+        <td th:text="${task.time}"></td>
+        <td><a th:href="@{/tasks/edit/} + ${task.id}" th:text="'Edit this task'"></a></td>
+    </tr>
+</table>
+<p th:if="${tasks.empty}">No tasks left to do</p>
+
+</body>
+</html>

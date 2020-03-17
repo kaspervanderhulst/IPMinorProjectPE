@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header th:insert="header.html :: header"></header>
+<section th:if="${task != null}">
+    <h1>Task detail</h1>
+    <p th:text="${task.name}"></p>
+    <p th:text="${task.description}"></p>
+    <span><p th:text="${task.date}"></p><p th:text="${task.time}"></p></span>
+    <a th:href="@{/tasks/} + ${task.id} + '/sub/create'" th:text="'Create a subtask for this task'"></a>
+    <section th:if="${subtasks != null}">
+        <p>Subtasks of<p th:text="${task.name}"></p></p>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr th:each="subtask : ${subtasks}">
+                <td th:text="${subtask.name}"></td>
+                <td th:text="${subtask.description}"></td>
+            </tr>
+        </table>
+    </section>
+</section>
+<section th:if="${task == null}">
+    <p>Task not found</p>
+</section>
+</body>
+</html>
