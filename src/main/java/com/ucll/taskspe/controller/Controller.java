@@ -1,14 +1,16 @@
 package com.ucll.taskspe.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.ucll.taskspe.domain.SubTask;
 import com.ucll.taskspe.domain.Task;
-import com.ucll.taskspe.repository.TaskRepository;
+import com.ucll.taskspe.dto.SubTaskDTO;
+import com.ucll.taskspe.dto.TaskDTO;
 import com.ucll.taskspe.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @org.springframework.stereotype.Controller
 //@RequestMapping("(/tasks")
@@ -20,6 +22,15 @@ public class Controller {
     @Autowired
     public Controller(TaskService taskService) {
         this.taskService = taskService;
+        Task task1 = new Task("task1","a task", LocalDate.of(2000,4,12), LocalTime.of(12,0));
+        Task task2 = new Task("task2","an easy task", LocalDate.of(2020,8,2), LocalTime.of(2,0));
+        Task task3 = new Task("task3","a difficult task", LocalDate.of(2021,11,25), LocalTime.of(13,30));
+        TaskDTO dto1 = Task.toDTO(task1);
+        TaskDTO dto2 = Task.toDTO(task2);
+        TaskDTO dto3 = Task.toDTO(task3);
+        taskService.addTask(dto1);
+        taskService.addTask(dto2);
+        taskService.addTask(dto3);
     }
 
 
@@ -33,7 +44,7 @@ public class Controller {
 
         model.addAttribute("taskId", id);
         model.addAttribute("task", taskService.getTask(id));
-        model.addAttribute("subtasks",taskService.getSubTasks().get(taskService.getTask(id)));
+        model.addAttribute("subtasks",taskService.getTask(id).getSubTasks());
         return "task";
     }
 
@@ -58,29 +69,28 @@ public class Controller {
     }
 
     @PostMapping("/tasks/new")
-    public String addTask(@ModelAttribute Task task) {
+    public String addTask(@ModelAttribute TaskDTO task) {
         taskService.addTask(task);
-
         return "redirect:/tasks";
     }
 
     @PostMapping("/tasks/edit/{id:\\d}")
-    public String editTask(@ModelAttribute Task task, @PathVariable("id") int id) {
+    public String editTask(@ModelAttribute TaskDTO task, @PathVariable("id") int id) {
 
         taskService.replaceTask(id, task);
 
         return "redirect:/tasks";
     }
 
-    @GetMapping("/tasks/{id}/sub/create")
+    @GetMapping("/tasks/{id:\\d}/sub/create")
     public String showSubtask(Model model, @PathVariable("id") int id){
         model.addAttribute("task",taskService.getTask(id));
         model.addAttribute(new SubTask());
         return "subTask";
     }
 
-    @PostMapping("/tasks/{id}/sub/create")
-    public String addSubtask(@ModelAttribute SubTask subTask,@PathVariable("id") int id){
+    @PostMapping("/tasks/{id:\\d}/sub/create")
+    public String addSubtask(@ModelAttribute SubTaskDTO subTask, @PathVariable("id") int id){
         taskService.addSubtask(taskService.getTask(id),subTask);
         System.out.println(taskService.getSubTasks());
         return "redirect:/tasks/"+ id;

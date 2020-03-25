@@ -1,31 +1,22 @@
-package com.ucll.taskspe.domain;
+package com.ucll.taskspe.dto;
 
-import com.ucll.taskspe.dto.SubTaskDTO;
-
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
-@Entity
-public class SubTask {
 
-@Id
-@GeneratedValue
-private int id;
+public class SubTaskDTO {
+
+    private int id;
     @NotEmpty
     private String name, description;
 
 
-    public SubTask(String name, String description) {
+    public SubTaskDTO(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public SubTask(){}
+    public SubTaskDTO(){}
 
     public String getDescription() {
         return description;
@@ -59,11 +50,4 @@ private int id;
                 '}';
     }
 
-    public static SubTask DTOtoSubTask(SubTaskDTO subTaskDTO){
-        SubTask subTask = new SubTask();
-        subTask.setId(subTaskDTO.getId());
-        subTask.setName(subTaskDTO.getName());
-        subTask.setDescription(subTaskDTO.getDescription());
-        return subTask;
-    }
 }
