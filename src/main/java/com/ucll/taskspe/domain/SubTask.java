@@ -15,7 +15,7 @@ public class SubTask {
 
 @Id
 @GeneratedValue
-private int id;
+private long id;
     @NotEmpty
     private String name, description;
 
@@ -43,11 +43,11 @@ private int id;
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

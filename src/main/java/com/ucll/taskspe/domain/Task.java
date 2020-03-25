@@ -3,10 +3,7 @@ package com.ucll.taskspe.domain;
 import com.ucll.taskspe.dto.TaskDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class Task {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime time;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<SubTask> subTasks;
 
     public Task(String name, String description, LocalDate date, LocalTime time){
@@ -85,7 +82,7 @@ public class Task {
     }
 
     public void addSubTask(SubTask subTask){
-        int id = 1;
+        long id = 0;
         if(this.subTasks.size() > 0){
             id = this.subTasks.get(subTasks.size()-1).getId()+1;
         }

@@ -44,6 +44,7 @@ public class Controller {
 
         model.addAttribute("taskId", id);
         model.addAttribute("task", taskService.getTask(id));
+        System.out.println(taskService.getTask(id).getSubTasks().toString());
         model.addAttribute("subtasks",taskService.getTask(id).getSubTasks());
         return "task";
     }

@@ -38,6 +38,7 @@ public class TaskServiceImpl implements TaskService {
         task.setDate(taskDTO.getDate());
         task.setTime(taskDTO.getTime());
         repository.save(task);
+        repository.flush();
     }
 
     @Override
@@ -74,7 +75,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void addSubtask(Task task, SubTaskDTO subTaskDTO) {
-        SubTask subTasktrans = SubTask.DTOtoSubTask(subTaskDTO);
-        repository.getOne(task.getId()).getSubTasks().add(subTasktrans);
+       Task t = getTask(task.getId());
+       t.addSubTask(SubTask.DTOtoSubTask(subTaskDTO));
+       repository.save(t);
+       repository.flush();
     }
 }
