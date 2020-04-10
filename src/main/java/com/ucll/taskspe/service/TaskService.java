@@ -4,6 +4,7 @@ import com.ucll.taskspe.domain.SubTask;
 import com.ucll.taskspe.domain.Task;
 import com.ucll.taskspe.dto.SubTaskDTO;
 import com.ucll.taskspe.dto.TaskDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;

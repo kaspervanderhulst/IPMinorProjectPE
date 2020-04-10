@@ -22,7 +22,7 @@ public class Controller {
     @Autowired
     public Controller(TaskService taskService) {
         this.taskService = taskService;
-        Task task1 = new Task("task1","a task", LocalDate.of(2000,4,12), LocalTime.of(12,0));
+       /* Task task1 = new Task("task1","a task", LocalDate.of(2000,4,12), LocalTime.of(12,0));
         Task task2 = new Task("task2","an easy task", LocalDate.of(2020,8,2), LocalTime.of(2,0));
         Task task3 = new Task("task3","a difficult task", LocalDate.of(2021,11,25), LocalTime.of(13,30));
         TaskDTO dto1 = Task.toDTO(task1);
@@ -30,7 +30,7 @@ public class Controller {
         TaskDTO dto3 = Task.toDTO(task3);
         taskService.addTask(dto1);
         taskService.addTask(dto2);
-        taskService.addTask(dto3);
+        taskService.addTask(dto3);*/
     }
 
 

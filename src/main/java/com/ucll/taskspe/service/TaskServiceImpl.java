@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
+
     private final TaskRepository repository;
 
     @Autowired
