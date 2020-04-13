@@ -7,8 +7,10 @@ import com.ucll.taskspe.dto.TaskDTO;
 import com.ucll.taskspe.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -70,7 +72,10 @@ public class Controller {
     }
 
     @PostMapping("/tasks/new")
-    public String addTask(@ModelAttribute TaskDTO task) {
+    public String addTask(@ModelAttribute @Valid TaskDTO task, BindingResult bindingResult) {
+        /*if(bindingResult.hasErrors()){
+            return "addTask";
+        }*/
         taskService.addTask(task);
         return "redirect:/tasks";
     }

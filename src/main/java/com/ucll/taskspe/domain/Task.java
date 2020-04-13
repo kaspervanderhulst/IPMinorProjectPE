@@ -4,6 +4,9 @@ import com.ucll.taskspe.dto.TaskDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -18,7 +21,15 @@ public class Task {
 
     private static int count = 0;
 
-    private String name,description;
+    @NotNull(message = "Name of Task cannot be empty")
+    @NotEmpty(message = "Name of Task cannot be empty")
+    private String name;
+
+    @NotEmpty(message = "Description of Task cannot be empty")
+    @NotNull(message = "Description of Task cannot be empty")
+    private String description;
+
+    @NotNull(message = "Date needs to be filled in")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Add a task</title>
@@ -7,24 +7,33 @@
 </head>
 <body>
 <header th:insert="header.html :: header"></header>
-<form method="post" action="/tasks/new">
+
+<form method="post" action="/tasks" th:object="${task}">
+    <!--<p th:text="${#fields.globalErrors()}"></p>
+    <p th:erros="*{}"></p>-->
     <h3>Add a task</h3>
+
     <div>
         <label for="name">Title:</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" th:field="*{name}">
+        <p th:errors="*{name}"></p>
     </div>
+
     <div>
         <label for="description">Description:</label>
         <input type="text" name="description" id="description">
     </div>
+
     <div>
         <label for="date">Due date:</label>
         <input type="date" name="date" id="date">
     </div>
+
     <div>
         <label for="time">Due time(optional):</label>
         <input type="time" name="time" id="time">
     </div>
+
     <input type="submit" value="Add Task">
 </form>
 
