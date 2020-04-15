@@ -59,7 +59,8 @@ public class Controller {
     }
 
     @GetMapping("/tasks/new")
-    public String addTaskPage() {
+    public String addTaskPage(Model model) {
+        model.addAttribute("taskdto", new TaskDTO());
         return "addTask";
     }
 
@@ -72,7 +73,7 @@ public class Controller {
     }
 
     @PostMapping("/tasks/new")
-    public String addTask(@ModelAttribute("task") @Valid TaskDTO task, BindingResult bindingResult) {
+    public String addTask(@ModelAttribute("taskdto") @Valid TaskDTO task, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "addTask";
         }

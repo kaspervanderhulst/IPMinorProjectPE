@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add a task</title>
@@ -8,33 +8,34 @@
 <body>
 <header th:insert="header.html :: header"></header>
 
-<form method="post" action="/tasks/new" th:object="${task}">
+<form method="post" action="/tasks/new" th:object="${taskdto}">
 
     <h3>Add a task</h3>
     <div>
+        <p th:text="${#fields.globalErrors()}"></p>
         <p th:errors="*{name}"></p>
         <p th:errors="*{description}"></p>
         <p th:errors="*{date}"></p>
     </div>
     <div>
         <label for="name">Title:</label>
-        <input type="text" th:field="name" name="name" id="name">
+        <input type="text" th:field="*{name}" name="name" id="name">
 
     </div>
 
     <div>
         <label for="description">Description:</label>
-        <input type="text" th:field="description" name="description" id="description">
+        <input type="text" th:field="*{description}" name="description" id="description">
     </div>
 
     <div>
         <label for="date">Due date:</label>
-        <input type="date" th:field="date" name="date" id="date">
+        <input type="date" th:field="*{date}" name="date" id="date">
     </div>
 
     <div>
         <label for="time">Due time(optional):</label>
-        <input type="time" th:field="time" name="time" id="time">
+        <input type="time" th:field="*{time}" name="time" id="time">
     </div>
 
     <input type="submit" value="Add Task">
