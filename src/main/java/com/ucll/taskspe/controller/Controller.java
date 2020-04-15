@@ -72,10 +72,10 @@ public class Controller {
     }
 
     @PostMapping("/tasks/new")
-    public String addTask(@ModelAttribute @Valid TaskDTO task, BindingResult bindingResult) {
-        /*if(bindingResult.hasErrors()){
+    public String addTask(@ModelAttribute("task") @Valid TaskDTO task, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
             return "addTask";
-        }*/
+        }
         taskService.addTask(task);
         return "redirect:/tasks";
     }

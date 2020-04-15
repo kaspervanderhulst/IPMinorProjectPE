@@ -8,30 +8,33 @@
 <body>
 <header th:insert="header.html :: header"></header>
 
-<form method="post" action="/tasks" th:object="${task}">
-    <!--<p th:text="${#fields.globalErrors()}"></p>
-    <p th:erros="*{}"></p>-->
-    <h3>Add a task</h3>
+<form method="post" action="/tasks/new" th:object="${task}">
 
+    <h3>Add a task</h3>
+    <div>
+        <p th:errors="*{name}"></p>
+        <p th:errors="*{description}"></p>
+        <p th:errors="*{date}"></p>
+    </div>
     <div>
         <label for="name">Title:</label>
-        <input type="text" name="name" id="name" th:field="*{name}">
-        <p th:errors="*{name}"></p>
+        <input type="text" th:field="name" name="name" id="name">
+
     </div>
 
     <div>
         <label for="description">Description:</label>
-        <input type="text" name="description" id="description">
+        <input type="text" th:field="description" name="description" id="description">
     </div>
 
     <div>
         <label for="date">Due date:</label>
-        <input type="date" name="date" id="date">
+        <input type="date" th:field="date" name="date" id="date">
     </div>
 
     <div>
         <label for="time">Due time(optional):</label>
-        <input type="time" name="time" id="time">
+        <input type="time" th:field="time" name="time" id="time">
     </div>
 
     <input type="submit" value="Add Task">
