@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
@@ -10,21 +10,33 @@
 
 <table th:if="${!tasks.empty}">
     <tr>
-        <th>Titel</th>
-        <th>Description</th>
-        <th>Due date</th>
-        <th>Time</th>
+        <th th:text="#{title}"></th>
+        <th th:text="#{description}">Description</th>
+        <th th:text="#{duedate}">Due date</th>
+        <th th:text="#{time}">Time</th>
         <th></th>
     </tr>
-    <tr th:each="task : ${tasks}" >
+    <tr th:each="task : ${tasks}">
         <td><a th:href="@{/tasks/} + ${task.id}" th:text="${task.name}"></a></td>
         <td th:text="${task.description}"></td>
         <td th:text="${task.date}"></td>
         <td th:text="${task.time}"></td>
-        <td><a th:href="@{/tasks/edit/} + ${task.id}" th:text="'Edit this task'"></a></td>
+        <td><a th:href="@{/tasks/edit/} + ${task.id}" th:text="#{edit}"></a></td>
     </tr>
 </table>
-<p th:if="${tasks.empty}">No tasks left to do</p>
+<p th:if="${tasks.empty}" th:text="#{notasks}"></p>
 
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != '') {
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New subtask</title>
@@ -7,21 +8,31 @@
 </head>
 <body>
 <header th:insert="header.html :: header"></header>
-<h1 th:text="'New subtask for ' + ${task.name}"></h1>
+<h1 th:text="#{newsubfor}"></h1><h1 th:text=" ${task.name}"></h1>
 
 <form method="post" th:action="@{/tasks/} + ${id} + '/sub/create'">
     <h3>Edit a task</h3>
     <div>
-        <label for="name">Title:</label>
+        <label for="name" th:text="#{taskTitle}"></label>
         <input type="text" name="name" id="name">
     </div>
     <div>
-        <label for="description">Description:</label>
+        <label for="description" th:text="#{taskDescription}"></label>
         <input type="text" name="description" id="description">
     </div>
 
-    <input type="submit" value="Add Task">
+    <input type="submit" th:value="#{taskSubmit}">
 </form>
 
 </body>
-</html>
+</html><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
+            }
+        });
+    });</script>
+

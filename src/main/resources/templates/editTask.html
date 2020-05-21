@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://java.sun.com/JSP/Page">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{editTaskTitle}" ></title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body th:if="${task != null}">
@@ -11,24 +12,27 @@
 <form method="post" th:action="@{/tasks/edit/} + ${id}">
     <h3>Edit a task</h3>
     <div>
-        <label for="name">Title:</label>
+        <label for="name" th:text="#{taskTime}"></label>
         <input type="text" name="name" id="name" th:value="${task.name}">
     </div>
     <div>
-        <label for="description">Description:</label>
+        <label for="description" th:text="#{taskDescription}"></label>
         <input type="text" name="description" id="description" th:value="${task.description}">
     </div>
     <div>
-        <label for="date">Due date:</label>
+        <label for="date" th:text="#{taskDate}"></label>
         <input type="date" name="date" id="date" th:value="${task.date}">
     </div>
     <div>
-        <label for="time">Due time(optional):</label>
+        <label for="time" th:text="#{taskTime}"></label>
         <input type="time" name="time" id="time" th:value="${task.time}">
     </div>
-    <input type="submit" value="Add Task">
+    <input type="submit" th:value="#{taskSubmit}" value="">
 </form>
 
 
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="locale.js"></script>
+

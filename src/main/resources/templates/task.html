@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Test</title>
+    <title th:text="#{taskpagetitle}" ></title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <header th:insert="header.html :: header"></header>
 <section th:if="${task != null}">
-    <h1>Task detail</h1>
+    <h1 th:text="#{taskdetail}"></h1>
     <p th:text="${task.name}"></p>
     <p th:text="${task.description}"></p>
     <span><p th:text="${task.date}"></p><p th:text="${task.time}"></p></span>
-    <a th:href="@{/tasks/} + ${task.id} + '/sub/create'" th:text="'Create a subtask for this task'"></a>
+    <a th:href="@{/tasks/} + ${task.id} + '/sub/create'" th:text="#{Createasubtaskforthistask}"></a>
     <section th:if="${subtasks != null}">
-        <p>Subtasks of<p th:text="${task.name}"></p></p>
+        <p th:text="#{subtasktsof}"><p th:text="${task.name}"></p></p>
         <table>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
+                <th th:text="#{name}" >Name</th>
+                <th th:text="#{description}" >Description</th>
             </tr>
             <tr th:each="subtask : ${subtasks}">
                 <td th:text="${subtask.name}"></td>
@@ -29,7 +29,19 @@
     </section>
 </section>
 <section th:if="${task == null}">
-    <p>Task not found</p>
+    <p th:text="#{notfound}"></p>
 </section>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
+

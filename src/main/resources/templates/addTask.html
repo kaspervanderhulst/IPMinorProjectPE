@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add a task</title>
+    <title th:text="#{addTaskTitle}"></title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -10,36 +10,47 @@
 
 <form method="post" action="/tasks/new" th:object="${taskdto}">
 
-    <h3>Add a task</h3>
+    <h3 th:text="#{addTaskTitle}" ></h3>
     <div>
-        <p th:text="${#fields.globalErrors()}"></p>
+
         <p th:errors="*{name}"></p>
         <p th:errors="*{description}"></p>
         <p th:errors="*{date}"></p>
     </div>
     <div>
-        <label for="name">Title:</label>
+        <label for="name" th:text="#{taskTitle}"></label>
         <input type="text" th:field="*{name}" name="name" id="name">
 
     </div>
 
     <div>
-        <label for="description">Description:</label>
+        <label for="description" th:text="#{taskDescription}" ></label>
         <input type="text" th:field="*{description}" name="description" id="description">
     </div>
 
     <div>
-        <label for="date">Due date:</label>
+        <label for="date" th:text="#{taskDate}"></label>
         <input type="date" th:field="*{date}" name="date" id="date">
     </div>
 
     <div>
-        <label for="time">Due time(optional):</label>
+        <label for="time" th:text="#{taskTime}"></label>
         <input type="time" th:field="*{time}" name="time" id="time">
     </div>
 
-    <input type="submit" value="Add Task">
+    <input type="submit" th:value="#{taskSubmit}" >
 </form>
 
 </body>
-</html>
+</html><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace(window.location.pathname + '?lang=' + selectedOption);
+            }
+        });
+    });
+
+</script>

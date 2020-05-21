@@ -41,7 +41,7 @@ public class Controller {
         return "index";
     }
 
-    @GetMapping("/tasks/{id:\\d}")
+    @GetMapping("/tasks/{id}")
     public String getTask(Model model, @PathVariable("id") int id) {
 
         model.addAttribute("taskId", id);
