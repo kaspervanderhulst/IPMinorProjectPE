@@ -64,6 +64,7 @@ private long id;
         subTask.setId(subTaskDTO.getId());
         subTask.setName(subTaskDTO.getName());
         subTask.setDescription(subTaskDTO.getDescription());
+        System.out.println("finished the conversion" + subTask.getId() + subTask.getDescription() + subTask.getName());
         return subTask;
     }
 }

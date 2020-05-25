@@ -93,6 +93,7 @@ public class Task {
     }
 
     public void addSubTask(SubTask subTask){
+        System.out.println("got here");
         long id = 0;
         if(this.subTasks.size() > 0){
             id = this.subTasks.get(subTasks.size()-1).getId()+1;
