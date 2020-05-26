@@ -4,16 +4,10 @@ import com.ucll.taskspe.domain.SubTask;
 import com.ucll.taskspe.domain.Task;
 import com.ucll.taskspe.dto.SubTaskDTO;
 import com.ucll.taskspe.dto.TaskDTO;
-import com.ucll.taskspe.repository.SubTaskRepository;
 import com.ucll.taskspe.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -80,12 +74,8 @@ public class TaskServiceImpl implements TaskService {
         st.setName(subTaskDTO.getName());
         st.setDescription(subTaskDTO.getDescription());
        Task t = getTask(task.getId());
-
-
        t.addSubTask(st);
        repository.save(t);
        repository.flush();
-
-
     }
 }

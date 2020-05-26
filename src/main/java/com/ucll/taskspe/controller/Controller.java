@@ -1,7 +1,6 @@
 package com.ucll.taskspe.controller;
 
 import com.ucll.taskspe.domain.SubTask;
-import com.ucll.taskspe.domain.Task;
 import com.ucll.taskspe.dto.SubTaskDTO;
 import com.ucll.taskspe.dto.TaskDTO;
 import com.ucll.taskspe.service.TaskService;
@@ -9,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 @org.springframework.stereotype.Controller
-//@RequestMapping("(/tasks")
+
 public class Controller {
 
 
@@ -24,15 +21,6 @@ public class Controller {
     @Autowired
     public Controller(TaskService taskService) {
         this.taskService = taskService;
-       /* Task task1 = new Task("task1","a task", LocalDate.of(2000,4,12), LocalTime.of(12,0));
-        Task task2 = new Task("task2","an easy task", LocalDate.of(2020,8,2), LocalTime.of(2,0));
-        Task task3 = new Task("task3","a difficult task", LocalDate.of(2021,11,25), LocalTime.of(13,30));
-        TaskDTO dto1 = Task.toDTO(task1);
-        TaskDTO dto2 = Task.toDTO(task2);
-        TaskDTO dto3 = Task.toDTO(task3);
-        taskService.addTask(dto1);
-        taskService.addTask(dto2);
-        taskService.addTask(dto3);*/
     }
 
 

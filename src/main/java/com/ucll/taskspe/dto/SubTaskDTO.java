@@ -1,7 +1,6 @@
 package com.ucll.taskspe.dto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
 import javax.validation.constraints.NotEmpty;
 
 public class SubTaskDTO {
@@ -10,11 +9,6 @@ public class SubTaskDTO {
     @NotEmpty
     private String name, description;
 
-
-    public SubTaskDTO(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 
     public SubTaskDTO(){}
 
@@ -42,12 +36,5 @@ public class SubTaskDTO {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "SubTask{" +
-                "subName='" + name + '\'' +
-                ", subDescription='" + description + '\'' +
-                '}';
-    }
 
 }

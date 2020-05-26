@@ -8,7 +8,7 @@
 <body>
 <header th:insert="header.html :: header"></header>
 
-<form method="post" action="/tasks/new" th:object="${taskdto}">
+<form method="post" th:action="@{/tasks/new}" th:object="${taskdto}">
 
     <h3 th:text="#{addTaskTitle}" ></h3>
     <div>

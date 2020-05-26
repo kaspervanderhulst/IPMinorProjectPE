@@ -1,15 +1,11 @@
 package com.ucll.taskspe.domain;
 
-import com.ucll.taskspe.dto.SubTaskDTO;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 @Entity
 public class SubTask {
 
