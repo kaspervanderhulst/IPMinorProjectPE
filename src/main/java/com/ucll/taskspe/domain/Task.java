@@ -16,10 +16,8 @@ import java.util.List;
 @Entity
 public class Task {
     @Id
-    @GeneratedValue
-    private long id;
-
-    private static int count = 0;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
     @NotNull(message = "Name of Task cannot be empty")
     @NotEmpty(message = "Name of Task cannot be empty")
@@ -35,22 +33,9 @@ public class Task {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime time;
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<SubTask> subTasks;
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+    private List<SubTask> subTasks = new ArrayList<>();
 
-    public Task(String name, String description, LocalDate date, LocalTime time){
-        setDate(date);
-        setName(name);
-        setTime(time);
-        setDescription(description);
-        subTasks = new ArrayList<>();
-        count++;
-        id = count;
-    }
-
-    public Task(){
-        subTasks = new ArrayList<>();
-    }
 
     public LocalDate getDate() {
         return date;
@@ -84,31 +69,22 @@ public class Task {
         this.time = time;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public void addSubTask(SubTask subTask){
-        System.out.println("got here");
-        long id = 0;
-        if(this.subTasks.size() > 0){
-            id = this.subTasks.get(subTasks.size()-1).getId()+1;
-        }
-        subTask.setId(id);
-        this.subTasks.add(subTask);
+        subTasks.add(subTask);
     }
 
     public List<SubTask> getSubTasks() {
         return subTasks;
     }
 
-    public void setSubTasks(List<SubTask> subTasks) {
-        this.subTasks = subTasks;
-    }
 
     public static TaskDTO toDTO(Task task){
         TaskDTO dto = new TaskDTO();

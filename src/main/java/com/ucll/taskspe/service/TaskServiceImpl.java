@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,8 +28,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getTasks() {
-        return repository.findAll();
+    public Map<Long,Task> getTasks() {
+        return repository.findAll().stream().collect(Collectors.toMap(Task::getId, Function.identity()));
     }
 
     @Override
@@ -40,26 +41,17 @@ public class TaskServiceImpl implements TaskService {
         task.setDescription(taskDTO.getDescription());
         task.setDate(taskDTO.getDate());
         task.setTime(taskDTO.getTime());
-        task.setId(taskDTO.getId());
-        System.out.println("adding task with id: " + task.getId());
         repository.save(task);
         repository.flush();
     }
 
     @Override
-    public Task getTask(long id) {
-        System.out.println("got here");
-        System.out.println(repository.getOne(id).getId() + "id in gettaskt");
-        System.out.println(repository.getOne(id).getDescription() + "name in gettask");
-       return repository.getOne(id);
-
-        /*if(id < 0 || id > repository.getTaskService().size()){
-            return null;
-        }else return repository.getTask(id);*/
+    public Task getTask(Long id) {
+       return getTasks().get(id);
     }
 
     @Override
-    public void replaceTask(long id, TaskDTO task) {
+    public void replaceTask(Long id, TaskDTO task) {
         Task task1 = new Task();
         task1.setDescription(task.getDescription());
         task1.setName(task.getName());
@@ -104,8 +96,8 @@ public class TaskServiceImpl implements TaskService {
 
        t.addSubTask(st);
         System.out.println(t.getSubTasks().get(0));
-      // repository.save(t);
-       //repository.flush();
+       repository.save(t);
+       repository.flush();
 
 
     }

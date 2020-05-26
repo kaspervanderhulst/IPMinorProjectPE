@@ -36,13 +36,13 @@ public class TaskServiceTest {
         taskService.addTask(taskDTO);
 
         //method to be tested
-        List<Task> tasks = taskService.getTasks();
+        Map<Long,Task> tasks = taskService.getTasks();
 
         //tests
         assertNotNull(tasks);
         assertFalse(tasks.isEmpty());
         assertEquals(1,tasks.size());
-        Task task = tasks.get(0);
+        Task task = taskService.getTask(1L);
         assertNotNull(task);
     }
 
@@ -55,16 +55,18 @@ public class TaskServiceTest {
         taskDTO.setDescription("This task is made for testindg");
         taskDTO.setDate(LocalDate.of(2020,11,1));
         taskDTO.setTime(LocalTime.of(12,0));
-        taskDTO.setId(2);
+        taskDTO.setId(2L);
         taskService.addTask(taskDTO);
        // assertEquals(taskDTO, Task.toDTO(taskService.getTask(taskDTO.getId())));
-        Task t = taskService.getTask(taskDTO.getId());
+        Task t = taskService.getTask(2L);
         SubTaskDTO subTaskDTO = new SubTaskDTO();
+       // Map<Task,List<SubTask>> d = taskService.getSubTasks();
         subTaskDTO.setName("subtask");
         subTaskDTO.setDescription("description of subtask");
         taskService.addSubtask(t,subTaskDTO);
-
-        SubTask subtask = taskService.getSubTasks().get(t).get(0);
+        Task t2 = taskService.getTask(2L);
+        //SubTask subtask = taskService.getSubTasks().get(t2).get(0);
+        SubTask subtask = t2.getSubTasks().get(0);
         //tests
         assertNotNull(subtask);
 
@@ -77,7 +79,6 @@ public class TaskServiceTest {
         taskDTO.setDescription("test description");
         taskDTO.setTime(LocalTime.of(12,0));
         taskDTO.setDate(LocalDate.of(2020, 3, 10));
-        taskDTO.setId(3L);
         System.out.println("id in test: " + taskDTO.getId());
         taskService.addTask(taskDTO);
 
@@ -88,26 +89,26 @@ public class TaskServiceTest {
         taskDTO2.setTime(LocalTime.of(12,0));
         taskDTO2.setDate(LocalDate.of(2020, 3, 10));
         System.out.println(taskDTO.getId());
-        taskService.replaceTask(3L, taskDTO2);
+        taskService.replaceTask(4L, taskDTO2);
 
         //method to be tested
-        Task task = taskService.getTasks().get(3);
+        Task task = taskService.getTasks().get(4L);
 
         //checks
         assertNotNull(task);
-        assertEquals(task.getName(), "jaff");
-        assertEquals(task.getDescription(), "Dunham");
+        assertEquals(task.getName(), "test");
+        assertEquals(task.getDescription(), "test description 2");
         assertEquals(task.getDate(), LocalDate.of(2020, 03, 10));
         assertEquals(task.toString(), "• jaff: due March 10 2020 at 10 AM");
 
     }
 
-    @Test
+    /*@Test
     public void tasktostringtest(){
         SubTask subTask = new SubTask("ts", "test");
         subTask.toString();
 
     }
-
+*/
 
 }

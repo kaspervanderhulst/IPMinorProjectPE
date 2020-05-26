@@ -19,14 +19,6 @@ private long id;
     @NotEmpty
     private String name, description;
 
-
-    public SubTask(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public SubTask(){}
-
     public String getDescription() {
         return description;
     }
@@ -59,12 +51,4 @@ private long id;
                 '}';
     }
 
-    public static SubTask DTOtoSubTask(SubTaskDTO subTaskDTO){
-        SubTask subTask = new SubTask();
-        subTask.setId(subTaskDTO.getId());
-        subTask.setName(subTaskDTO.getName());
-        subTask.setDescription(subTaskDTO.getDescription());
-        System.out.println("finished the conversion" + subTask.getId() + subTask.getDescription() + subTask.getName());
-        return subTask;
-    }
 }

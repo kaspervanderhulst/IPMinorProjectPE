@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface TaskService {
-    public List<Task> getTasks();
+     Map<Long,Task> getTasks();
     void addTask(TaskDTO taskDTO);
-    Task getTask(long id);
-    void replaceTask(long id,TaskDTO taskDTO);
+    Task getTask(Long id);
+    void replaceTask(Long id,TaskDTO taskDTO);
     Map<Task, List<SubTask>> getSubTasks();
     void addSubtask(Task task, SubTaskDTO subtask);
 

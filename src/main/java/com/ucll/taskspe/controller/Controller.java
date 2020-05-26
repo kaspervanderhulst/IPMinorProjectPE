@@ -42,7 +42,7 @@ public class Controller {
     }
 
     @GetMapping("/tasks/{id}")
-    public String getTask(Model model, @PathVariable("id") int id) {
+    public String getTask(Model model, @PathVariable("id") Long id) {
 
         model.addAttribute("taskId", id);
         model.addAttribute("task", taskService.getTask(id));
@@ -65,7 +65,7 @@ public class Controller {
     }
 
     @GetMapping("tasks/edit/{id:\\d}")
-    public String editTaskPage(Model model, @PathVariable("id") int id) {
+    public String editTaskPage(Model model, @PathVariable("id") Long id) {
         model.addAttribute("taskId", id);
         model.addAttribute("task", taskService.getTask(id));
         model.addAttribute("id", id);
@@ -82,7 +82,7 @@ public class Controller {
     }
 
     @PostMapping("/tasks/edit/{id:\\d}")
-    public String editTask(@ModelAttribute TaskDTO task, @PathVariable("id") int id) {
+    public String editTask(@ModelAttribute TaskDTO task, @PathVariable("id") Long id) {
 
         taskService.replaceTask(id, task);
 
@@ -90,14 +90,14 @@ public class Controller {
     }
 
     @GetMapping("/tasks/{id:\\d}/sub/create")
-    public String showSubtask(Model model, @PathVariable("id") int id){
+    public String showSubtask(Model model, @PathVariable("id") Long id){
         model.addAttribute("task",taskService.getTask(id));
         model.addAttribute(new SubTask());
         return "subTask";
     }
 
     @PostMapping("/tasks/{id:\\d}/sub/create")
-    public String addSubtask(@ModelAttribute SubTaskDTO subTask, @PathVariable("id") int id){
+    public String addSubtask(@ModelAttribute SubTaskDTO subTask, @PathVariable("id") Long id){
         taskService.addSubtask(taskService.getTask(id),subTask);
         System.out.println(taskService.getSubTasks());
         return "redirect:/tasks/"+ id;
