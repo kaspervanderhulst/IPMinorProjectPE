@@ -54,7 +54,7 @@ public class Controller {
 
     @GetMapping("/tasks")
     public String getTasks(Model model) {
-        model.addAttribute("tasks", taskService.getTasks());
+        model.addAttribute("tasks", taskService.getTasks().values());
         return "tasks";
     }
 

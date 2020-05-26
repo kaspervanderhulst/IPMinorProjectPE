@@ -96,4 +96,15 @@ public class Task {
         return dto;
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", subTasks=" + subTasks +
+                '}';
+    }
 }

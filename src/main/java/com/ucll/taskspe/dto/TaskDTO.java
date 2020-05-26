@@ -62,4 +62,5 @@ public class TaskDTO {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
 }
